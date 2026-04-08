@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://6ujymgxaojwx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5gr4a"]
-size = Vector3(1.9, 0.1, 1.9)
+size = Vector3(0.9, 0.1, 0.9)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gr4a"]
 albedo_color = Color(0.39308518, 0.3930856, 0.39308533, 1)
 
-[node name="floor_tile" type="MeshInstance3D" unique_id=646339272]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5gr4a"]
+size = Vector3(0.9, 0.1, 0.9)
+
+[node name="floor_tile" type="StaticBody3D" unique_id=535216323]
+
+[node name="floor_tile" type="MeshInstance3D" parent="." unique_id=646339272]
 mesh = SubResource("BoxMesh_5gr4a")
 surface_material_override/0 = SubResource("StandardMaterial3D_5gr4a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1266228645]
+shape = SubResource("BoxShape3D_5gr4a")

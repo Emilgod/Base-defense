@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://blpi46c2rgl2n"]
+
+[ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="1_tbp63"]
+[ext_resource type="PackedScene" uid="uid://bb67uf6krn2a1" path="res://scenes/buildings/tower_basic.tscn" id="1_wwr2y"]
+
+[resource]
+script = ExtResource("1_tbp63")
+scene = ExtResource("1_wwr2y")
+metadata/_custom_type_script = "uid://cy7a27un6c2t2"

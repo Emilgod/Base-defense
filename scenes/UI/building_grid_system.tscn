@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bo1ofv021yw2r"]
+
+[ext_resource type="MeshLibrary" uid="uid://budjd2affi3x6" path="res://resources/grid_mesh_library.tres" id="2_1cdct"]
+
+[node name="tower_grid_system" type="Node3D" unique_id=1729817946]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=457579863]
+mesh_library = ExtResource("2_1cdct")
+cell_size = Vector3(1, 0.1, 1)
+metadata/_editor_floor_ = Vector3(0, 0, 0)

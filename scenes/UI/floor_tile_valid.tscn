@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bumy70yy50gls"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7xbuv"]
-size = Vector3(1.9, 0.1, 1.9)
+size = Vector3(0.9, 0.1, 0.9)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xbuv"]
 albedo_color = Color(0.24705854, 0.74147475, 0, 1)
@@ -9,6 +9,14 @@ emission_enabled = true
 emission = Color(0.8646751, 0.86467516, 0.8646751, 1)
 emission_energy_multiplier = 0.12
 
-[node name="floor_tile_valid" type="MeshInstance3D" unique_id=646339272]
+[sub_resource type="BoxShape3D" id="BoxShape3D_7xbuv"]
+size = Vector3(0.9, 0.1, 0.9)
+
+[node name="floor_tile_valid" type="StaticBody3D" unique_id=1171600272]
+
+[node name="floor_tile_valid" type="MeshInstance3D" parent="." unique_id=646339272]
 mesh = SubResource("BoxMesh_7xbuv")
 surface_material_override/0 = SubResource("StandardMaterial3D_7xbuv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=841043675]
+shape = SubResource("BoxShape3D_7xbuv")

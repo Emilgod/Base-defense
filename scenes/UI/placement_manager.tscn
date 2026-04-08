@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bomelwiwxxfh"]
+
+[ext_resource type="Script" uid="uid://bimhkwr6h3yq6" path="res://scripts/placement_manager.gd" id="1_n1ulq"]
+[ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="2_cg1dj"]
+
+[sub_resource type="Resource" id="Resource_ccida"]
+script = ExtResource("2_cg1dj")
+metadata/_custom_type_script = "uid://cy7a27un6c2t2"
+
+[node name="placement_manager" type="Node3D" unique_id=844004503]
+script = ExtResource("1_n1ulq")
+current_card = SubResource("Resource_ccida")

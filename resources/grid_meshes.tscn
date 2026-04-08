@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://caknuc36mukmj"]
+
+[ext_resource type="PackedScene" uid="uid://6ujymgxaojwx" path="res://scenes/UI/floor_tile.tscn" id="1_qume6"]
+[ext_resource type="PackedScene" uid="uid://bumy70yy50gls" path="res://scenes/UI/floor_tile_valid.tscn" id="2_mpji8"]
+[ext_resource type="PackedScene" uid="uid://de0b4ttxw116k" path="res://scenes/UI/floor_tile_blocked.tscn" id="3_1secg"]
+
+[node name="Node3D" type="Node3D" unique_id=398315188]
+
+[node name="floor_tile" parent="." unique_id=535216323 instance=ExtResource("1_qume6")]
+
+[node name="floor_tile_valid" parent="." unique_id=1171600272 instance=ExtResource("2_mpji8")]
+
+[node name="floor_tile_blocked" parent="." unique_id=1203150728 instance=ExtResource("3_1secg")]

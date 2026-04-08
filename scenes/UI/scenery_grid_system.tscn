@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bniydrkcrp1qq"]
+
+[ext_resource type="MeshLibrary" uid="uid://b058dagb8fbhy" path="res://resources/tiles_meshlib.tres" id="1_fjnjd"]
+
+[node name="scenery_grid_system" type="Node3D" unique_id=1102330429]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=1371665835]
+mesh_library = ExtResource("1_fjnjd")
+cell_size = Vector3(1, 0.2, 1)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
