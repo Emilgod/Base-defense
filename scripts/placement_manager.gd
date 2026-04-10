@@ -9,7 +9,8 @@ var occupied_cells: Dictionary = {}
 var drag_mode: bool = false  # True when card UI is dragging
 var preview_instance: Node3D
 var valid_tiles: Array[Vector3i] = []
-
+var is_placing: bool = false
+var preview_origin_cell: Vector3i
 func _ready():
 	valid_tiles = build_gridmap.get_used_cells()
 
@@ -49,19 +50,16 @@ func spawn_tower(cell: Vector3i, card: CardData):
 		print("Invalid card or scene")
 		return
 	
-	# Check if placement is valid
-	var footprint = get_footprint(cell, card.size)
+	var footprint = get_footprint(preview_origin_cell, card.size)
+	print("Footprint: ", footprint)
+	# Calculate footprint center (same as preview)
+	var footprint_center = Vector3.ZERO
 	for foot_cell in footprint:
-		if occupied_cells.has(foot_cell):
-			print("Cell occupied: ", foot_cell)
-			return
+		footprint_center += build_gridmap.map_to_local(foot_cell)
+	footprint_center /= footprint.size()
 	
-	# Calculate world position
-	var world_pos = build_gridmap.map_to_local(cell)
-	
-	# Instantiate and place tower
 	var tower = card.scene.instantiate()
-	tower.global_position = build_gridmap.to_global(world_pos)
+	tower.global_position = footprint_center
 	add_child(tower)
 	
 	# Mark cells as occupied
@@ -81,6 +79,7 @@ func is_cell_occupied(cell: Vector3i) -> bool:
 	return occupied_cells.has(cell)
 
 func show_preview(card: CardData):
+	current_card = card  
 	if preview_instance:
 		preview_instance.queue_free()
 	preview_instance = card.scene.instantiate()
@@ -101,13 +100,26 @@ func update_preview_position():
 	var world_pos = ray_origin + ray_normal * t
 	var local_pos = build_gridmap.to_local(world_pos)
 	var cell = build_gridmap.local_to_map(local_pos)
-	
-	# Clamp Y to 0 (ground level only)
 	cell.y = 0
+	preview_origin_cell = cell
 	
-	preview_instance.global_position = build_gridmap.map_to_local(cell)
+	var footprint = get_footprint(cell, current_card.size)
+	var footprint_center = Vector3.ZERO
+	for foot_cell in footprint:
+		footprint_center += build_gridmap.map_to_local(foot_cell)
+	footprint_center /= footprint.size()
 	
-	var is_valid = cell in valid_tiles and not occupied_cells.has(cell)
+	preview_instance.global_position = footprint_center
+	
+	footprint = get_footprint(cell, current_card.size)
+	for foot_cell in footprint:
+		print("Cell: ", foot_cell, " | Valid: ", foot_cell in valid_tiles)
+	var is_valid = true
+	for foot_cell in footprint:
+		if foot_cell not in valid_tiles or occupied_cells.has(foot_cell):
+			is_valid = false
+			break
+	
 	set_preview_color(is_valid)
 
 func set_preview_color(is_valid: bool):
@@ -132,14 +144,20 @@ func try_place_preview() -> bool:
 	if not preview_instance:
 		return false
 	
-	var cell = build_gridmap.local_to_map(build_gridmap.to_local(preview_instance.global_position))
+	var footprint = get_footprint(preview_origin_cell, current_card.size)
+	var is_valid = true
+	for foot_cell in footprint:
+		if foot_cell not in valid_tiles or occupied_cells.has(foot_cell):
+			is_valid = false
+			print("Invalid cell: ", foot_cell)
+			break
 	
-	if cell in valid_tiles and not occupied_cells.has(cell):
-		spawn_tower(cell, current_card)
+	if is_valid:
+		spawn_tower(preview_origin_cell, current_card)
 		hide_preview()
-		await get_tree().process_frame  # Wait one frame
+		is_placing = false
 		return true
 	else:
-		print("Cell: ", cell, " | In valid_tiles: ", cell in valid_tiles, " | Occupied: ", occupied_cells.has(cell))
 		hide_preview()
+		is_placing = false
 		return false

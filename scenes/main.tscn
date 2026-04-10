@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bb67uf6krn2a1" path="res://scenes/buildings/tower_basic.tscn" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://xp05n6i006lu" path="res://scenes/UI/cards_ui.tscn" id="7_o6xl0"]
+[ext_resource type="Resource" uid="uid://2ax2vyl15nyl" path="res://resources/cards/card_wall.tres" id="8_tipki"]
 
 [sub_resource type="Environment" id="Environment_jyhfs"]
 background_mode = 1
@@ -92,6 +93,7 @@ placement_manager = NodePath("../../../placement_manager")
 
 [node name="cards_UI3" parent="Container/HBoxContainer" unique_id=593709281 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
 layout_mode = 2
+card_data = ExtResource("8_tipki")
 placement_manager = NodePath("../../../placement_manager")
 
 [editable path="building_grid_system"]

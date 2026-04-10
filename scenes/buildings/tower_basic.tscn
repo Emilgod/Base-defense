@@ -46,8 +46,6 @@ shadow_mesh = SubResource("ArrayMesh_a4cgk")
 size = Vector3(0.93452734, 1.049, 0.9)
 
 [node name="tower_basic" type="StaticBody3D" unique_id=479407356]
-collision_layer = 0
-collision_mask = 0
 
 [node name="tower-round-build-a" type="MeshInstance3D" parent="." unique_id=1424884047]
 mesh = SubResource("ArrayMesh_bndty")
