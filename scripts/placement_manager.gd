@@ -91,18 +91,27 @@ func update_preview_position():
 	var ray_origin = camera.project_ray_origin(mouse_pos)
 	var ray_normal = camera.project_ray_normal(mouse_pos)
 	
-	# Raycast to ground
+	if ray_normal.y >= -0.01:
+		return
+	
 	var t = -ray_origin.y / ray_normal.y
+	if t < 0:
+		return
+	
 	var world_pos = ray_origin + ray_normal * t
-	var cell = build_gridmap.local_to_map(build_gridmap.to_local(world_pos))
+	var local_pos = build_gridmap.to_local(world_pos)
+	var cell = build_gridmap.local_to_map(local_pos)
+	
+	# Clamp Y to 0 (ground level only)
+	cell.y = 0
 	
 	preview_instance.global_position = build_gridmap.map_to_local(cell)
 	
 	var is_valid = cell in valid_tiles and not occupied_cells.has(cell)
 	set_preview_color(is_valid)
-	
+
 func set_preview_color(is_valid: bool):
-	var color = Color.GREEN if is_valid else Color.RED
+	var color = Color.GREEN if is_valid else Color.RED 
 	set_color_recursive(preview_instance, color)
 
 func set_color_recursive(node: Node, color: Color):
@@ -131,5 +140,6 @@ func try_place_preview() -> bool:
 		await get_tree().process_frame  # Wait one frame
 		return true
 	else:
+		print("Cell: ", cell, " | In valid_tiles: ", cell in valid_tiles, " | Occupied: ", occupied_cells.has(cell))
 		hide_preview()
 		return false

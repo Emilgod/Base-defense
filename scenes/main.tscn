@@ -42,6 +42,7 @@ data = {
 }
 
 [node name="scenery_grid_system" parent="." unique_id=1102330429 instance=ExtResource("4_jyhfs")]
+visible = false
 
 [node name="GridMap" parent="scenery_grid_system" index="0" unique_id=1371665835]
 collision_layer = 0
