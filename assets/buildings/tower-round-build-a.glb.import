@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dg5ae3qs14fv0"
-path="res://.godot/imported/tower-round-build-a.glb-023754227ce3fcd165596a93f4f35bcc.scn"
+path="res://.godot/imported/tower-round-build-a.glb-dde4aaebbe66aaf4843388f7eb006c2f.scn"
 
 [deps]
 
-source_file="res://assets/towers/tower-round-build-a.glb"
-dest_files=["res://.godot/imported/tower-round-build-a.glb-023754227ce3fcd165596a93f4f35bcc.scn"]
+source_file="res://assets/buildings/tower-round-build-a.glb"
+dest_files=["res://.godot/imported/tower-round-build-a.glb-dde4aaebbe66aaf4843388f7eb006c2f.scn"]
 
 [params]
 

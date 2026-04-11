@@ -11,6 +11,7 @@ var preview_instance: Node3D
 var valid_tiles: Array[Vector3i] = []
 var is_placing: bool = false
 var preview_origin_cell: Vector3i
+
 func _ready():
 	valid_tiles = build_gridmap.get_used_cells()
 
@@ -128,9 +129,15 @@ func set_preview_color(is_valid: bool):
 
 func set_color_recursive(node: Node, color: Color):
 	if node is MeshInstance3D:
-		var mat = node.get_active_material(0).duplicate()
-		mat.albedo_color = color
-		node.set_surface_override_material(0, mat)
+		var mesh = node.mesh
+		if mesh:
+			# Color all surfaces
+			for i in range(mesh.get_surface_count()):
+				var mat = node.get_active_material(i).duplicate()
+				mat.albedo_color = color
+				mat.disable_receive_shadows = true
+				mat.no_depth_test = true
+				node.set_surface_override_material(i, mat)
 	
 	for child in node.get_children():
 		set_color_recursive(child, color)

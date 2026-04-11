@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://ddkvwcyutjp87"]
+
+[ext_resource type="Texture2D" uid="uid://cdhkmoabdd34n" path="res://assets/2D stuff/house.jpg" id="1_chi75"]
+[ext_resource type="PackedScene" uid="uid://cls4krofi8t7n" path="res://tower_house.tscn" id="1_diy4j"]
+[ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="1_ygamo"]
+
+[resource]
+script = ExtResource("1_ygamo")
+card_name = "house"
+description = "makes moneh"
+scene = ExtResource("1_diy4j")
+size = Vector3i(2, 1, 2)
+card_art = ExtResource("1_chi75")
+metadata/_custom_type_script = "uid://cy7a27un6c2t2"

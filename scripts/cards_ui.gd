@@ -3,7 +3,7 @@ extends Control
 @export var card_data: CardData
 @export var description: Label
 @export var title: Label
-@export var color_rect: ColorRect
+@export var card_art: TextureRect
 @export var placement_manager: Node3D
 
 
@@ -17,8 +17,9 @@ func _ready():
 func update_display():
 	title.text = card_data.card_name
 	description.text = card_data.description
-	color_rect.modulate = Color.GREEN
-
+	if card_data.card_art:
+		# If you have a TextureRect node
+		card_art.texture = card_data.card_art
 
 func _process(_delta):
 	pass

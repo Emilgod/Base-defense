@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://2ax2vyl15nyl"]
 
+[ext_resource type="Texture2D" uid="uid://ce4unltg4mwkx" path="res://assets/2D stuff/fence.jpg" id="1_6c1j8"]
 [ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="1_i10e7"]
 [ext_resource type="PackedScene" uid="uid://y21bqdt4val7" path="res://scenes/buildings/tower_wall.tscn" id="1_ovpt0"]
 
 [resource]
 script = ExtResource("1_i10e7")
 card_name = "wall"
-description = "a wall.."
+description = "block stuff"
 scene = ExtResource("1_ovpt0")
 size = Vector3i(2, 1, 1)
+card_art = ExtResource("1_6c1j8")
 metadata/_custom_type_script = "uid://cy7a27un6c2t2"

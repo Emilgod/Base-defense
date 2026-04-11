@@ -1,30 +1,37 @@
 [gd_scene format=3 uid="uid://xp05n6i006lu"]
 
 [ext_resource type="Script" uid="uid://ckjayrocqpr48" path="res://scripts/cards_ui.gd" id="1_2piph"]
-[ext_resource type="Resource" uid="uid://blpi46c2rgl2n" path="res://resources/cards/card_turret.tres" id="2_1ep7u"]
 
-[node name="cards_UI" type="Control" unique_id=1101872737 node_paths=PackedStringArray("description", "title", "color_rect")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2piph"]
+bg_color = Color(0.74558026, 0.7455802, 0.74558014, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ep7u"]
+bg_color = Color(0.18359044, 0.18359047, 0.18359032, 1)
+
+[node name="cards_UI" type="Control" unique_id=1101872737 node_paths=PackedStringArray("description", "title", "card_art")]
 z_index = 1
+custom_minimum_size = Vector2(50, 135)
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -134.0
+offset_right = 25.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_2piph")
-card_data = ExtResource("2_1ep7u")
 description = NodePath("PanelContainer/VBoxContainer/description")
 title = NodePath("PanelContainer/VBoxContainer/title")
-color_rect = NodePath("PanelContainer/VBoxContainer/tower_art")
+card_art = NodePath("PanelContainer/VBoxContainer/card_art")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1781075126]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.48697916
-anchor_top = 0.8324074
-anchor_right = 0.5130208
+anchor_right = 0.9999994
 anchor_bottom = 1.0
 offset_right = 6.1035156e-05
 grow_horizontal = 2
@@ -32,23 +39,36 @@ grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=2004107825]
+custom_minimum_size = Vector2(50, 130)
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="tower_art" type="ColorRect" parent="PanelContainer/VBoxContainer" unique_id=1452063516]
-custom_minimum_size = Vector2(50, 100)
+[node name="card_art" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=1081038644]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+expand_mode = 1
 
 [node name="title" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1649097234]
+custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.1728327, 0.17283267, 0.17283267, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_2piph")
 text = "tower"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="description" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1478885947]
+custom_minimum_size = Vector2(50, 60)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ep7u")
 text = "shoots stuff "
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
-[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/tower_art" to="." method="_on_tower_art_mouse_entered"]
-[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/tower_art" to="." method="_on_tower_art_mouse_exited"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/card_art" to="." method="_on_tower_art_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/card_art" to="." method="_on_tower_art_mouse_exited"]

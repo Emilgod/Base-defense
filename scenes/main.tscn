@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bb67uf6krn2a1" path="res://scenes/buildings/tower_basic.tscn" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://xp05n6i006lu" path="res://scenes/UI/cards_ui.tscn" id="7_o6xl0"]
+[ext_resource type="Resource" uid="uid://blpi46c2rgl2n" path="res://resources/cards/card_turret.tres" id="8_choun"]
 [ext_resource type="Resource" uid="uid://2ax2vyl15nyl" path="res://resources/cards/card_wall.tres" id="8_tipki"]
+[ext_resource type="Resource" uid="uid://ddkvwcyutjp87" path="res://resources/cards/card_house.tres" id="10_ya4ey"]
 
 [sub_resource type="Environment" id="Environment_jyhfs"]
 background_mode = 1
@@ -78,22 +80,31 @@ grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container" unique_id=1848205370]
 layout_mode = 0
-offset_top = -62.0
-offset_right = 120.0
-offset_bottom = -27.0
-theme_override_constants/separation = 65
+offset_left = -354.0
+offset_top = -134.0
+offset_right = 437.0
+offset_bottom = 1.0
+theme_override_constants/separation = 5
+alignment = 1
 
-[node name="cards_UI" parent="Container/HBoxContainer" unique_id=1101872737 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
+[node name="tower" parent="Container/HBoxContainer" unique_id=1101872737 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
 layout_mode = 2
+card_data = ExtResource("8_choun")
 placement_manager = NodePath("../../../placement_manager")
 
-[node name="cards_UI2" parent="Container/HBoxContainer" unique_id=245830027 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
-layout_mode = 2
-placement_manager = NodePath("../../../placement_manager")
-
-[node name="cards_UI3" parent="Container/HBoxContainer" unique_id=593709281 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
+[node name="wall" parent="Container/HBoxContainer" unique_id=842165540 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
 layout_mode = 2
 card_data = ExtResource("8_tipki")
+placement_manager = NodePath("../../../placement_manager")
+
+[node name="house" parent="Container/HBoxContainer" unique_id=304243405 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
+layout_mode = 2
+card_data = ExtResource("10_ya4ey")
+placement_manager = NodePath("../../../placement_manager")
+
+[node name="tower2" parent="Container/HBoxContainer" unique_id=315145918 node_paths=PackedStringArray("placement_manager") instance=ExtResource("7_o6xl0")]
+layout_mode = 2
+card_data = ExtResource("8_choun")
 placement_manager = NodePath("../../../placement_manager")
 
 [editable path="building_grid_system"]
