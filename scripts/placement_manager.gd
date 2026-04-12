@@ -110,7 +110,7 @@ func update_preview_position():
 	footprint_center /= footprint.size()
 	
 	preview_instance.global_position = footprint_center
-	preview_instance.rotation.y = preview_rotation
+	#preview_instance.rotation.y = preview_rotation
 	
 	for foot_cell in footprint:
 		print("Cell: ", foot_cell, " | Valid: ", foot_cell in valid_tiles)
