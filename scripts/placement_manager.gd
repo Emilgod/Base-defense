@@ -11,6 +11,7 @@ var preview_instance: Node3D
 var valid_tiles: Array[Vector3i] = []
 var is_placing: bool = false
 var preview_origin_cell: Vector3i
+var preview_rotation: float = 0.0
 
 func _ready():
 	valid_tiles = build_gridmap.get_used_cells()
@@ -20,7 +21,12 @@ func _input(event):
 	if not drag_mode and event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			pass
-			#place_tower()
+			
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			if preview_instance:
+				preview_rotation += PI / 2  # 90 degree rotation
+				preview_instance.rotation.y = preview_rotation
 
 func _process(delta: float) -> void:
 	if preview_instance:
@@ -29,31 +35,13 @@ func _process(delta: float) -> void:
 func set_drag_mode(is_dragging: bool):
 	drag_mode = is_dragging
 
-func place_tower():
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_end = ray_origin + camera.project_ray_normal(mouse_pos) * 1000
-	
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	var result = space_state.intersect_ray(query)
-	
-	if result:
-		var local_pos = build_gridmap.to_local(result.position)
-		var cell = build_gridmap.local_to_map(local_pos)
-		
-		spawn_tower(cell, current_card)
-	else:
-		print("clicked nuffin")
-
 func spawn_tower(cell: Vector3i, card: CardData):
 	if card == null or card.scene == null:
 		print("Invalid card or scene")
 		return
 	
-	var footprint = get_footprint(preview_origin_cell, card.size)
-	print("Footprint: ", footprint)
-	# Calculate footprint center (same as preview)
+	var footprint = get_footprint_rotated(cell, card.size, preview_rotation)
+	
 	var footprint_center = Vector3.ZERO
 	for foot_cell in footprint:
 		footprint_center += build_gridmap.map_to_local(foot_cell)
@@ -61,9 +49,9 @@ func spawn_tower(cell: Vector3i, card: CardData):
 	
 	var tower = card.scene.instantiate()
 	tower.global_position = footprint_center
+	tower.rotation.y = preview_rotation  # Add this
 	add_child(tower)
 	
-	# Mark cells as occupied
 	for foot_cell in footprint:
 		occupied_cells[foot_cell] = true
 	
@@ -76,11 +64,28 @@ func get_footprint(origin: Vector3i, size: Vector3i) -> Array[Vector3i]:
 			cells.append(origin + Vector3i(x, 0, z))
 	return cells
 
+func get_footprint_rotated(origin: Vector3i, size: Vector3i, rotation: float) -> Array[Vector3i]:
+	var cells: Array[Vector3i] = []
+	var rotations = int(rotation / (PI / 2)) % 4
+	
+	for x in range(size.x):
+		for z in range(size.z):
+			var pos = Vector3i(x, 0, z)
+			
+			# Rotate position around origin
+			for _i in range(rotations):
+				pos = Vector3i(-pos.z, 0, pos.x)
+			
+			cells.append(origin + pos)
+	
+	return cells
+
 func is_cell_occupied(cell: Vector3i) -> bool:
 	return occupied_cells.has(cell)
 
 func show_preview(card: CardData):
-	current_card = card  
+	current_card = card
+	preview_rotation = 0.0  # Reset rotation
 	if preview_instance:
 		preview_instance.queue_free()
 	preview_instance = card.scene.instantiate()
@@ -104,15 +109,15 @@ func update_preview_position():
 	cell.y = 0
 	preview_origin_cell = cell
 	
-	var footprint = get_footprint(cell, current_card.size)
+	var footprint = get_footprint_rotated(cell, current_card.size, preview_rotation)
 	var footprint_center = Vector3.ZERO
 	for foot_cell in footprint:
 		footprint_center += build_gridmap.map_to_local(foot_cell)
 	footprint_center /= footprint.size()
 	
 	preview_instance.global_position = footprint_center
+	preview_instance.rotation.y = preview_rotation
 	
-	footprint = get_footprint(cell, current_card.size)
 	for foot_cell in footprint:
 		print("Cell: ", foot_cell, " | Valid: ", foot_cell in valid_tiles)
 	var is_valid = true
@@ -151,7 +156,7 @@ func try_place_preview() -> bool:
 	if not preview_instance:
 		return false
 	
-	var footprint = get_footprint(preview_origin_cell, current_card.size)
+	var footprint = get_footprint_rotated(preview_origin_cell, current_card.size, preview_rotation)
 	var is_valid = true
 	for foot_cell in footprint:
 		if foot_cell not in valid_tiles or occupied_cells.has(foot_cell):
