@@ -57,13 +57,6 @@ func spawn_tower(cell: Vector3i, card: CardData):
 	
 	print("Tower spawned at ", cell)
 
-func get_footprint(origin: Vector3i, size: Vector3i) -> Array[Vector3i]:
-	var cells: Array[Vector3i] = []
-	for x in range(size.x):
-		for z in range(size.z):
-			cells.append(origin + Vector3i(x, 0, z))
-	return cells
-
 func get_footprint_rotated(origin: Vector3i, size: Vector3i, rotation: float) -> Array[Vector3i]:
 	var cells: Array[Vector3i] = []
 	var rotations = int(rotation / (PI / 2)) % 4
@@ -84,10 +77,11 @@ func is_cell_occupied(cell: Vector3i) -> bool:
 	return occupied_cells.has(cell)
 
 func show_preview(card: CardData):
+	if preview_instance:  # Already dragging
+		return
+	
 	current_card = card
-	preview_rotation = 0.0  # Reset rotation
-	if preview_instance:
-		preview_instance.queue_free()
+	preview_rotation = 0.0
 	preview_instance = card.scene.instantiate()
 	add_child(preview_instance)
 

@@ -43,7 +43,8 @@ func _on_tower_art_mouse_entered() -> void:
 
 
 func _on_tower_art_mouse_exited() -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		is_dragging = true
-		placement_manager.show_preview(card_data)
-		hide()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging:
+		if placement_manager.preview_instance == null:  # Only drag if no preview
+			is_dragging = true
+			placement_manager.show_preview(card_data)
+			hide()
