@@ -83,6 +83,9 @@ func show_preview(card: CardData):
 	current_card = card
 	preview_rotation = 0.0
 	preview_instance = card.scene.instantiate()
+	for child in preview_instance.get_children():
+		if child is CollisionShape3D:
+			child.disabled = true
 	add_child(preview_instance)
 
 func update_preview_position():

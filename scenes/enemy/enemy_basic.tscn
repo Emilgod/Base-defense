@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dhyppgimtsc6n"]
+
+[ext_resource type="Script" uid="uid://dq43xmv45j2ym" path="res://scripts/enemy_basic.gd" id="1_viy2q"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pm67m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_viy2q"]
+
+[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 groups=["enemies"]]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_viy2q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=811935590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
+mesh = SubResource("CapsuleMesh_pm67m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=324301235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
+shape = SubResource("CapsuleShape3D_viy2q")

@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://cls4krofi8t7n"]
 
-[ext_resource type="PackedScene" uid="uid://ce42wwigy8cpt" path="res://assets/buildings/house.glb" id="1_covy5"]
+[ext_resource type="PackedScene" uid="uid://ce42wwigy8cpt" path="res://assets/buildings/house.glb" id="1_opt1e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5lqwm"]
 size = Vector3(2, 1, 2)
 
-[node name="StaticBody3D" type="StaticBody3D" unique_id=1285585630]
+[node name="building_house" type="StaticBody3D" unique_id=1285585630 groups=["buildings"]]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1602415868]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48890483, 0)
 shape = SubResource("BoxShape3D_5lqwm")
 
-[node name="house" parent="." unique_id=1008638210 instance=ExtResource("1_covy5")]
+[node name="house" parent="." unique_id=1008638210 instance=ExtResource("1_opt1e")]
 
 [editable path="house"]
