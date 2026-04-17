@@ -13,11 +13,14 @@ var is_wave_active: bool = false
 
 func _ready():
 	update_ui()
+
 func _process(delta):
-	if current_wave_value < wave_value_budget:
+	if is_wave_active and current_wave_value < wave_value_budget:
 		spawn_random_enemy()
-	if current_wave_value >= wave_value_budget and get_enemy_count() == 0:
+	
+	if is_wave_active and current_wave_value >= wave_value_budget and get_enemy_count() == 0:
 		finish_wave()
+
 func spawn_random_enemy():
 	var enemy_scene = enemy_types[randi() % enemy_types.size()]
 	var enemy = enemy_scene.instantiate()
@@ -29,12 +32,7 @@ func spawn_random_enemy():
 		current_wave_value += enemy_value
 		print(current_wave_value)
 		
-func _on_start_wave():
-	if not is_wave_active:
-		is_wave_active = true
-		wave_button.disabled = true
-		current_wave_value = 0
-		update_ui()
+
 
 func update_ui():
 	wave_label.text = "Wave: %d" % current_wave
@@ -51,5 +49,8 @@ func finish_wave():
 	wave_label.text = "Wave: %d  completed!" % current_wave
 
 func _on_wave_button_pressed() -> void:
-	if is_wave_active == false:
+	if not is_wave_active:
 		current_wave += 1
+		current_wave_value = 0
+		is_wave_active = true
+		update_ui()

@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bb67uf6krn2a1"]
 
 [ext_resource type="Texture2D" uid="uid://30ngxlv2byaq" path="res://assets/buildings/Textures/colormap.png" id="1_7ws5h"]
+[ext_resource type="Script" uid="uid://bt68fla0g4efy" path="res://scripts/building_basic_tower.gd" id="1_fmcoq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxjxq"]
 resource_name = "colormap"
@@ -45,9 +46,12 @@ shadow_mesh = SubResource("ArrayMesh_a4cgk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_pd4aj"]
 size = Vector3(0.93452734, 1.049, 0.9)
 
-[node name="tower_basic" type="StaticBody3D" unique_id=479407356 groups=["buildings"]]
+[node name="tower_basic" type="StaticBody3D" unique_id=479407356 node_paths=PackedStringArray("health_label") groups=["buildings"]]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_fmcoq")
+max_health = 3.0
+health_label = NodePath("Label3D")
 
 [node name="tower-round-build-a" type="MeshInstance3D" parent="." unique_id=1424884047]
 mesh = SubResource("ArrayMesh_bndty")
@@ -55,3 +59,9 @@ mesh = SubResource("ArrayMesh_bndty")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1411652813]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019595593, 0.51773834, 0)
 shape = SubResource("BoxShape3D_pd4aj")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1370670814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2659583, 0)
+pixel_size = 0.035
+billboard = 1
+text = "3"

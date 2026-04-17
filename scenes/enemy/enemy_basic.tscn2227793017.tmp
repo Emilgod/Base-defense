@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dhyppgimtsc6n"]
+
+[ext_resource type="Script" uid="uid://dq43xmv45j2ym" path="res://scripts/enemy_basic.gd" id="1_viy2q"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pm67m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_viy2q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_viy2q"]
+radius = 4.9781904
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_maj1q"]
+radius = 1.2641141
+
+[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 node_paths=PackedStringArray("targeting_range", "attack_range") groups=["enemies"]]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_viy2q")
+max_health = null
+damage = null
+attack_rate = null
+gold_reward = null
+move_speed = 3.0
+wave_value = null
+targeting_range = NodePath("targeting_range")
+attack_range = NodePath("attack_range")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=811935590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
+mesh = SubResource("CapsuleMesh_pm67m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=324301235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
+shape = SubResource("CapsuleShape3D_viy2q")
+
+[node name="targeting_range" type="Area3D" parent="." unique_id=1199575491]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="targeting_range" unique_id=1883718899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3838346, 0)
+shape = SubResource("SphereShape3D_viy2q")
+
+[node name="attack_range" type="Area3D" parent="." unique_id=1928030552]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attack_range" unique_id=612086646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87069273, 0)
+shape = SubResource("SphereShape3D_maj1q")

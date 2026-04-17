@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cs5rciodc4edp"]
+
+[ext_resource type="Script" uid="uid://coxo57t8oh8gi" path="res://scripts/core.gd" id="1_0jag4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ba5wy"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ba5wy"]
+data = PackedVector3Array(-1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0jag4"]
+size = Vector3(3.4952393, 3.284729, 3.5444336)
+
+[node name="CORE" type="StaticBody3D" unique_id=1573865916]
+collision_mask = 0
+script = ExtResource("1_0jag4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1986460649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5126148, 0)
+mesh = SubResource("BoxMesh_ba5wy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2086457764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5126148, 0)
+shape = SubResource("ConcavePolygonShape3D_ba5wy")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=706828887]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1219859161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03729248, 1.648346, -0.012451172)
+shape = SubResource("BoxShape3D_0jag4")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=692727003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.343879, 0)
+pixel_size = 0.035
+billboard = 1
+text = "3"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

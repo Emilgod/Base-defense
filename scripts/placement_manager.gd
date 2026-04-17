@@ -52,6 +52,9 @@ func spawn_tower(cell: Vector3i, card: CardData):
 	tower.rotation.y = preview_rotation  # Add this
 	add_child(tower)
 	
+	if tower.has_method("setup"):
+		tower.setup(self, footprint)  # Pass placement manager and footprint
+	
 	for foot_cell in footprint:
 		occupied_cells[foot_cell] = true
 	

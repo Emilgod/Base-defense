@@ -2,19 +2,59 @@
 
 [ext_resource type="Script" uid="uid://dq43xmv45j2ym" path="res://scripts/enemy_basic.gd" id="1_viy2q"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pm67m"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_viy2q"]
+height = 1.5
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_viy2q"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_maj1q"]
+height = 1.4309082
+radius = 0.59228516
 
-[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 groups=["enemies"]]
+[sub_resource type="SphereShape3D" id="SphereShape3D_viy2q"]
+radius = 4.9781904
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_maj1q"]
+radius = 1.2641141
+
+[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 node_paths=PackedStringArray("health_label", "targeting_range", "attack_range", "attack_timer") groups=["enemies"]]
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_viy2q")
+health_label = NodePath("attack_range/CollisionShape3D/Label3D")
+move_speed = 3.0
+targeting_range = NodePath("targeting_range")
+attack_range = NodePath("attack_range")
+attack_timer = NodePath("attack_timer")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=811935590]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
-mesh = SubResource("CapsuleMesh_pm67m")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=414958114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7650726, 0)
+mesh = SubResource("CylinderMesh_viy2q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=324301235]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0210838, 0)
-shape = SubResource("CapsuleShape3D_viy2q")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=638851813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83771455, 0)
+shape = SubResource("CylinderShape3D_maj1q")
+
+[node name="targeting_range" type="Area3D" parent="." unique_id=1199575491]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="targeting_range" unique_id=1883718899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3838346, 0)
+shape = SubResource("SphereShape3D_viy2q")
+
+[node name="attack_range" type="Area3D" parent="." unique_id=1928030552]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attack_range" unique_id=612086646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87069273, 0)
+shape = SubResource("SphereShape3D_maj1q")
+
+[node name="Label3D" type="Label3D" parent="attack_range/CollisionShape3D" unique_id=1920361051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4168563, 0)
+pixel_size = 0.035
+billboard = 1
+text = "3"
+
+[node name="attack_timer" type="Timer" parent="." unique_id=1301608642]
+wait_time = 2.0
+one_shot = true
