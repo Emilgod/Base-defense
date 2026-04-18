@@ -1,17 +1,20 @@
 class_name Building
 extends StaticBody3D
 
-@export var max_health: float 
 @export var health_label:Label3D
+@export var max_health: float 
+@export var fire_rate: Timer
+@export var range: Area3D
+@export var damage: float
 
 var current_health: float
-
 var placement_manager: Node3D
 var occupied_cells: Array[Vector3i] = []
 
 func _ready():
 	current_health = max_health
 	health_label.text = str(int(current_health))
+
 
 func take_damage(damage: float):
 	current_health -= damage
@@ -32,3 +35,13 @@ func die():
 
 func get_health_percent() -> float:
 	return current_health / max_health
+
+func find_target() -> Node3D:
+	if range:
+		var bodies = range.get_overlapping_bodies()
+		for body in bodies:
+			if body.is_in_group("enemies"):
+				return body
+		return null
+	else:
+		return

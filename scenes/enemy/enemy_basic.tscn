@@ -20,6 +20,7 @@ collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_viy2q")
 health_label = NodePath("attack_range/CollisionShape3D/Label3D")
+max_health = 3.0
 move_speed = 3.0
 targeting_range = NodePath("targeting_range")
 attack_range = NodePath("attack_range")

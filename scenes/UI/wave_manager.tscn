@@ -4,22 +4,26 @@
 
 [node name="wave_manager" type="Control" unique_id=1276564784]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 1.0
+offset_right = -1920.0
+grow_horizontal = 2
 script = ExtResource("1_ib3xs")
 
-[node name="wave_label" type="Label" parent="." unique_id=1540376859]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=379905142]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 8.0
-offset_right = 73.0
-offset_bottom = 31.0
+offset_right = 1920.0
+offset_bottom = 100.0
 
-[node name="wave_button" type="Button" parent="." unique_id=1881851529]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 76.0
-offset_right = 111.0
-offset_bottom = 107.0
+[node name="wave_label" type="Label" parent="VBoxContainer" unique_id=1540376859]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wave_button" type="Button" parent="VBoxContainer" unique_id=1881851529]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "next wave"
 
-[connection signal="pressed" from="wave_button" to="." method="_on_wave_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/wave_button" to="." method="_on_wave_button_pressed"]

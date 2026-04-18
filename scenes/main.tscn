@@ -38,9 +38,9 @@ light_energy = 1.225
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=524601834]
-transform = Transform3D(0.54097474, 0.540609, -0.6442734, 0, 0.7660448, 0.6427872, 0.8410389, -0.34773162, 0.41441086, -8.242977, 7.8125687, 10.059355)
+transform = Transform3D(0.5842526, 0.71291494, -0.38781595, 0, 0.4778578, 0.8784372, 0.8115719, -0.51322925, 0.27918965, -8.932175, 15.10983, 10.759935)
 current = true
-fov = 80.8
+fov = 62.6
 
 [node name="building_grid_system" parent="." unique_id=1729817946 instance=ExtResource("3_sugp2")]
 
@@ -111,6 +111,7 @@ card_data = ExtResource("8_choun")
 placement_manager = NodePath("../../../placement_manager")
 
 [node name="wave_manager" parent="." unique_id=318068687 node_paths=PackedStringArray("spawn_point") instance=ExtResource("11_eb6dy")]
+anchors_preset = 10
 enemy_types = Array[PackedScene]([ExtResource("12_trceg")])
 wave_value_budget = 5
 spawn_point = NodePath("../spawn_point")

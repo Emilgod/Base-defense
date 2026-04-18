@@ -8,8 +8,8 @@ var current_wave: int = 0
 var current_wave_value: int = 0
 var is_wave_active: bool = false
 
-@onready var wave_button = $wave_button
-@onready var wave_label = $wave_label
+@onready var wave_button = $VBoxContainer/wave_button
+@onready var wave_label = $VBoxContainer/wave_label
 
 func _ready():
 	update_ui()
@@ -46,6 +46,7 @@ func finish_wave():
 	is_wave_active = false
 	wave_button.disabled = false
 	update_ui()
+	wave_value_budget = ceil(wave_value_budget * 1.2)
 	wave_label.text = "Wave: %d  completed!" % current_wave
 
 func _on_wave_button_pressed() -> void:

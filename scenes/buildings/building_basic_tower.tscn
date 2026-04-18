@@ -46,12 +46,18 @@ shadow_mesh = SubResource("ArrayMesh_a4cgk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_pd4aj"]
 size = Vector3(0.93452734, 1.049, 0.9)
 
-[node name="tower_basic" type="StaticBody3D" unique_id=479407356 node_paths=PackedStringArray("health_label") groups=["buildings"]]
+[sub_resource type="SphereShape3D" id="SphereShape3D_fmcoq"]
+radius = 3.0
+
+[node name="tower_basic" type="StaticBody3D" unique_id=479407356 node_paths=PackedStringArray("health_label", "fire_rate", "range") groups=["buildings"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_fmcoq")
-max_health = 3.0
 health_label = NodePath("Label3D")
+max_health = 3.0
+fire_rate = NodePath("fire_rate")
+range = NodePath("range")
+damage = 1.0
 
 [node name="tower-round-build-a" type="MeshInstance3D" parent="." unique_id=1424884047]
 mesh = SubResource("ArrayMesh_bndty")
@@ -65,3 +71,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2659583, 0)
 pixel_size = 0.035
 billboard = 1
 text = "3"
+
+[node name="range" type="Area3D" parent="." unique_id=781091347]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="range" unique_id=1930108431]
+shape = SubResource("SphereShape3D_fmcoq")
+
+[node name="fire_rate" type="Timer" parent="." unique_id=2146303742]
+wait_time = 2.0
+one_shot = true
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=663244802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3323293, 0)
