@@ -6,3 +6,4 @@ extends Resource
 @export var scene:       PackedScene
 @export var size:        Vector3i    = Vector3i(1,1,1) 
 @export var card_art: Texture2D
+@export var cost: int

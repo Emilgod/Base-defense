@@ -11,4 +11,5 @@ description = "makes moneh"
 scene = ExtResource("1_diy4j")
 size = Vector3i(2, 1, 2)
 card_art = ExtResource("1_chi75")
+cost = 20
 metadata/_custom_type_script = "uid://cy7a27un6c2t2"

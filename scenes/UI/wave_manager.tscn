@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://dll7btu7ha6m"]
 
 [ext_resource type="Script" uid="uid://bwf2qxoq8h8px" path="res://scripts/wave_manager.gd" id="1_ib3xs"]
+[ext_resource type="Script" uid="uid://cufue0p5aove7" path="res://scripts/shop.gd" id="2_vcduw"]
+[ext_resource type="Script" uid="uid://cy7a27un6c2t2" path="res://resources/cards/CardData.gd" id="3_j2sjk"]
+[ext_resource type="Resource" uid="uid://2ax2vyl15nyl" path="res://resources/cards/card_wall.tres" id="4_oa0a5"]
+[ext_resource type="Resource" uid="uid://ddkvwcyutjp87" path="res://resources/cards/card_house.tres" id="5_4noqh"]
+[ext_resource type="Resource" uid="uid://blpi46c2rgl2n" path="res://resources/cards/card_turret.tres" id="6_udxxg"]
 
 [node name="wave_manager" type="Control" unique_id=1276564784]
 layout_mode = 3
+anchors_preset = 10
 anchor_right = 1.0
 offset_right = -1920.0
 grow_horizontal = 2
@@ -26,4 +32,63 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "next wave"
 
+[node name="shop_button" type="Button" parent="VBoxContainer" unique_id=1274505431]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "SHOP"
+
+[node name="gold_label" type="Label" parent="." unique_id=221559970]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 26.0
+offset_right = 802.0
+offset_bottom = 58.0
+
+[node name="shop" type="Control" parent="." unique_id=237552214 node_paths=PackedStringArray("wall_card", "house_card", "tower_card")]
+anchors_preset = 0
+script = ExtResource("2_vcduw")
+available_cards = Array[ExtResource("3_j2sjk")]([ExtResource("4_oa0a5"), ExtResource("5_4noqh"), ExtResource("6_udxxg")])
+wall_card = NodePath("VBoxContainer/GridContainer/wall_card")
+house_card = NodePath("VBoxContainer/GridContainer/house_card")
+tower_card = NodePath("VBoxContainer/GridContainer/tower_card")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="shop" unique_id=1247124919]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 188.0
+offset_right = 1582.0
+offset_bottom = 796.0
+
+[node name="Label" type="Label" parent="shop/VBoxContainer" unique_id=90681321]
+layout_mode = 2
+text = "SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="shop/VBoxContainer" unique_id=1310696618]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="wall_card" type="Button" parent="shop/VBoxContainer/GridContainer" unique_id=506100080]
+layout_mode = 2
+text = "WALL
+10"
+
+[node name="house_card" type="Button" parent="shop/VBoxContainer/GridContainer" unique_id=799366087]
+layout_mode = 2
+text = "HOUSE
+20"
+
+[node name="tower_card" type="Button" parent="shop/VBoxContainer/GridContainer" unique_id=88711355]
+layout_mode = 2
+text = "TOWER
+10"
+
 [connection signal="pressed" from="VBoxContainer/wave_button" to="." method="_on_wave_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/shop_button" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="shop/VBoxContainer/GridContainer/wall_card" to="shop" method="_on_wall_card_pressed"]
+[connection signal="pressed" from="shop/VBoxContainer/GridContainer/house_card" to="shop" method="_on_house_card_pressed"]
+[connection signal="pressed" from="shop/VBoxContainer/GridContainer/tower_card" to="shop" method="_on_tower_card_pressed"]

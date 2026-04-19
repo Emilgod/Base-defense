@@ -5,8 +5,6 @@ extends Control
 @export var title: Label
 @export var card_art: TextureRect
 @export var placement_manager: Node3D
-
-
 var is_dragging:bool = false
 
 
@@ -43,6 +41,8 @@ func _on_tower_art_mouse_entered() -> void:
 
 
 func _on_tower_art_mouse_exited() -> void:
+	if GameManager.wave_active == true:
+		return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dragging:
 		if placement_manager.preview_instance == null:  # Only drag if no preview
 			is_dragging = true

@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://dq43xmv45j2ym" path="res://scripts/enemy_basic.gd" id="1_viy2q"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_viy2q"]
-height = 1.5
+height = 1.05
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_maj1q"]
-height = 1.4309082
-radius = 0.59228516
+height = 1.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_viy2q"]
 radius = 4.9781904
@@ -15,7 +14,11 @@ radius = 4.9781904
 [sub_resource type="SphereShape3D" id="SphereShape3D_maj1q"]
 radius = 1.2641141
 
-[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 node_paths=PackedStringArray("health_label", "targeting_range", "attack_range", "attack_timer") groups=["enemies"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_viy2q"]
+height = 0.551
+radius = 0.68
+
+[node name="enemy_basic" type="RigidBody3D" unique_id=848335113 node_paths=PackedStringArray("health_label", "targeting_range", "attack_range", "attack_timer", "shapecast") groups=["enemies"]]
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_viy2q")
@@ -25,13 +28,15 @@ move_speed = 3.0
 targeting_range = NodePath("targeting_range")
 attack_range = NodePath("attack_range")
 attack_timer = NodePath("attack_timer")
+shapecast = NodePath("ShapeCast3D")
+gold_value = 10
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=414958114]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7650726, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5312997, 0)
 mesh = SubResource("CylinderMesh_viy2q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=638851813]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83771455, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=108405050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5312997, 0)
 shape = SubResource("CylinderShape3D_maj1q")
 
 [node name="targeting_range" type="Area3D" parent="." unique_id=1199575491]
@@ -59,3 +64,12 @@ text = "3"
 [node name="attack_timer" type="Timer" parent="." unique_id=1301608642]
 wait_time = 2.0
 one_shot = true
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=2121694554]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, -0.016328692, 0.83776355, -0.7694929)
+shape = SubResource("CylinderShape3D_viy2q")
+target_position = Vector3(0, 0, 0)
+collision_mask = 8
+debug_shape_custom_color = Color(0.99999994, 0.29527423, 0.9938007, 1)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2070567537]

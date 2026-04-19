@@ -8,13 +8,16 @@ var current_wave: int = 0
 var current_wave_value: int = 0
 var is_wave_active: bool = false
 
+@onready var shop = $shop
 @onready var wave_button = $VBoxContainer/wave_button
 @onready var wave_label = $VBoxContainer/wave_label
+@onready var gold_label = $gold_label
 
 func _ready():
 	update_ui()
-
+	
 func _process(delta):
+	update_gold()
 	if is_wave_active and current_wave_value < wave_value_budget:
 		spawn_random_enemy()
 	
@@ -33,9 +36,13 @@ func spawn_random_enemy():
 		print(current_wave_value)
 		
 
+func update_gold():
+	gold_label.text = "GOLD: %d" % GameManager.gold
+
 
 func update_ui():
 	wave_label.text = "Wave: %d" % current_wave
+	gold_label.text = "GOLD: %d" % GameManager.gold
 	if is_wave_active:
 		wave_label.text += " | Value: %d/%d" % [current_wave_value, wave_value_budget]
 
@@ -44,6 +51,7 @@ func get_enemy_count() -> int:
 	
 func finish_wave():
 	is_wave_active = false
+	GameManager.wave_active = false
 	wave_button.disabled = false
 	update_ui()
 	wave_value_budget = ceil(wave_value_budget * 1.2)
@@ -51,7 +59,18 @@ func finish_wave():
 
 func _on_wave_button_pressed() -> void:
 	if not is_wave_active:
+		shop.hide()
 		current_wave += 1
+		GameManager.current_wave += 1
 		current_wave_value = 0
 		is_wave_active = true
+		GameManager.wave_active = true
 		update_ui()
+
+
+func _on_shop_button_pressed() -> void:
+	if  not is_wave_active:
+		if shop.visible:
+			shop.hide()
+		else:
+			shop.show()

@@ -11,4 +11,5 @@ description = "block stuff"
 scene = ExtResource("1_ovpt0")
 size = Vector3i(2, 1, 1)
 card_art = ExtResource("1_6c1j8")
+cost = 5
 metadata/_custom_type_script = "uid://cy7a27un6c2t2"

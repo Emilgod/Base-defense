@@ -17,7 +17,7 @@ run/max_fps=120
 
 [autoload]
 
-RunState="*uid://dc482veuhjfc2"
+GameManager="*uid://dc482veuhjfc2"
 
 [display]
 

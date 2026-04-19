@@ -14,5 +14,6 @@ func shoot(target: Node3D):
 	projectile.damage = damage
 	get_parent().add_child(projectile)
 	
-	var direction = (target.global_position - projectile.global_position).normalized()
-	projectile.velocity = direction * projectile.speed  # Projectile needs a speed export
+	var target_center = target.global_position + Vector3(0, target.get_node("CollisionShape3D").shape.radius, 0)
+	var direction = (target_center - projectile.global_position).normalized()
+	projectile.velocity = direction * projectile.speed

@@ -47,7 +47,7 @@ shadow_mesh = SubResource("ArrayMesh_a4cgk")
 size = Vector3(0.93452734, 1.049, 0.9)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fmcoq"]
-radius = 3.0
+radius = 5.0
 
 [node name="tower_basic" type="StaticBody3D" unique_id=479407356 node_paths=PackedStringArray("health_label", "fire_rate", "range") groups=["buildings"]]
 collision_layer = 2

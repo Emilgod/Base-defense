@@ -45,3 +45,18 @@ func find_target() -> Node3D:
 		return null
 	else:
 		return
+		
+func find_closest_target() -> Node3D:
+	if range:
+		var bodies = range.get_overlapping_bodies()
+		var closest: Node3D = null
+		var closest_dist = INF
+		
+		for body in bodies:
+			if body.is_in_group("enemies"):
+				var dist = global_position.distance_to(body.global_position)
+				if dist < closest_dist:
+					closest = body
+					closest_dist = dist
+		return closest
+	return null
